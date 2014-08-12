@@ -851,7 +851,7 @@ $tcount+= $ticket->getNumNotes();
             </tr>
             <tr>
                 <td width="120" style="vertical-align:top">
-                    <label><strong>Comments:</strong><span class='error'>&nbsp;*</span></label>
+                    <label><strong>Comments:</strong><span class='error'>&nbsp;</span></label>
                 </td>
                 <td>
                     <textarea name="assign_comments" id="assign_comments"
