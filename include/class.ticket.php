@@ -1987,7 +1987,7 @@ class Ticket {
         $fields['slaId']    = array('type'=>'int',      'required'=>0, 'error'=>'Select SLA');
         $fields['duedate']  = array('type'=>'date',     'required'=>0, 'error'=>'Invalid date - must be MM/DD/YY');
 
-        $fields['note']     = array('type'=>'text',     'required'=>1, 'error'=>'Reason for the update required');
+        //$fields['note']     = array('type'=>'text',     'required'=>1, 'error'=>'Reason for the update required');
         $fields['user_id']  = array('type'=>'int',      'required'=>0, 'error'=>'Invalid user-id');
 
         if(!Validator::process($fields, $vars, $errors) && !$errors['err'])
