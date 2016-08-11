@@ -462,9 +462,10 @@ if($_POST && !$errors):
                                 }
 
                                 //Log a warning
-                                if($i) {
-                                    $log = sprintf('%s (%s) just deleted %d ticket(s)',
-                                            $thisstaff->getName(), $thisstaff->getUserName(), $i);
+				if($i) {
+                                    $deleted_tids = implode(', ', $_POST['tids']);
+                                    $log = sprintf('%s (%s) just deleted %d ticket(s) (%s)',
+                                            $thisstaff->getName(), $thisstaff->getUserName(), $i, $deleted_tids);
                                     $ost->logWarning('Tickets deleted', $log, false);
 
                                 }
