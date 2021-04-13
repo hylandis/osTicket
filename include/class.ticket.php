@@ -961,6 +961,7 @@ class Ticket {
 
         //Log stuff here...
 
+
         if(!$autorespond && !$alertstaff) return true; //No alerts to send.
 
         /* ------ SEND OUT NEW TICKET AUTORESP && ALERTS ----------*/
@@ -973,10 +974,22 @@ class Ticket {
                 return false;  //bail out...missing stuff.
         }
 
-        $options = array(
-            'inreplyto'=>$message->getEmailMessageId(),
-            'references'=>$message->getEmailReferences(),
-            'thread'=>$message);
+	$options = array();
+	if (($message instanceof ThreadEntry)
+                && $message->getEmailMessageId()) {
+            $options += array(
+                'inreplyto'=>$message->getEmailMessageId(),
+                'references'=>$message->getEmailReferences(),
+                'thread'=>$message
+            );
+        }
+        else {
+            $options += array(
+                'thread' => $this->getThread(),
+            );
+        }
+//global $ost;
+//$ost->logDebug('nate here', $this->getNumber());
 
         //Send auto response - if enabled.
         if($autorespond
@@ -2871,7 +2884,7 @@ class Ticket {
 
         //Don't send alerts to staff when the message is a bounce
         //  this is necessary to avoid possible loop (especially on new ticket)
-        if ($alertstaff && $message->isBounce())
+        if ($alertstaff && $message instanceof ThreadEntry && $message->isBounce())
             $alertstaff = false;
 
         /***** See if we need to send some alerts ****/
